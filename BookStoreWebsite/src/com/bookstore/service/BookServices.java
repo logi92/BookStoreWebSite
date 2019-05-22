@@ -68,11 +68,17 @@ public class BookServices {
 
 //================================================================== CREATE
 	public void createBook() throws ServletException, IOException {
+		String title = request.getParameter("title");
 		Book newBook = new Book();
 		readBookFields(newBook);
 
+		Book existBook = bookDAO.findByTitle(title);
+		if (existBook != null) {
+			String message = "Could not create new book because this title: \"" + title + "\" already exists!";
+			listBooks(message);
+			return;
+		}
 		Book createdBook = bookDAO.create(newBook);
-
 		if (createdBook != null) {
 			String message = "A new Book has been created successfully!";
 			listBooks(message);
@@ -100,14 +106,6 @@ public class BookServices {
 
 		book.setAuthor(author);
 		book.setTitle(title);
-
-		Book existBook = bookDAO.findByTitle(title);
-		if (existBook != null) {
-			String message = "Could not create new book because this title: \"" + title + "\" already exists!";
-			listBooks(message);
-			return;
-		}
-
 		book.setIsbn(isbn);
 		book.setPrice(price);
 		book.setDescription(description);
@@ -141,8 +139,8 @@ public class BookServices {
 		List<Category> listCategory = categoryDAO.listAll();
 		request.setAttribute("listCategory", listCategory);
 
-		String newPage = "book_form.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(newPage);
+		String formPage = "book_form.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(formPage);
 		dispatcher.forward(request, response);
 	}
 
