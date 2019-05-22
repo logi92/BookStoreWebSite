@@ -172,6 +172,17 @@ public class BookDAOTest extends BaseDAOTest {
 		assertTrue(listBooks.size() > 0);
 	}
 
+	@Test
+	public void testListNewBooks() {
+		List<Book> result = bookDAO.listNewBooks();
+		
+		for (Book item : result) {
+			System.out.println(item.getTitle());
+		}
+		
+		assertEquals(4, result.size());
+	}
+
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		BaseDAOTest.tearDownAfterClass();
