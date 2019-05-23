@@ -193,7 +193,7 @@ public class BookServices {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(categoryPage);
 		dispatcher.forward(request, response);
 	}
-
+//================================================================== viewBookDetail
 	public void viewBookDetail() throws ServletException, IOException {
 		int bookId = Integer.parseInt(request.getParameter("id"));
 
@@ -207,9 +207,9 @@ public class BookServices {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(detailPage);
 		dispatcher.forward(request, response);
 	}
-
+//================================================================== search
 	public void search() throws ServletException, IOException {
-		String keyword = request.getParameter("keyWord");
+		String keyword = request.getParameter("keyword");
 		List<Book> result = null;
 
 		if (keyword.equalsIgnoreCase("")) {
@@ -219,7 +219,8 @@ public class BookServices {
 		}
 
 		request.setAttribute("result", result);
-
+		request.setAttribute("keyword", keyword);
+		
 		String detailPage = "frontend/search_result.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(detailPage);
 		dispatcher.forward(request, response);
