@@ -5,13 +5,16 @@
 	</div>
 	
 	<div>
-		<input type="search" name="keyword" size="50" /> 
-		<input type="button" value="Search" /> 
-		
+		<form action="search" method="get">
+			<input type="search" name="keyword" size="50" /> 
+			<input type="submit" value="Search" /> 
+			
 		&nbsp;&nbsp;&nbsp;&nbsp; 
-		<a href="">Sign In</a> |
-		<a href="">Register</a> | 
-		<a href="">Cart</a>
+		
+			<a href="">Sign In</a> |
+			<a href="">Register</a> | 
+			<a href="">Cart</a>
+		</form>
 	</div>
 	
 	<div>&nbsp;</div>

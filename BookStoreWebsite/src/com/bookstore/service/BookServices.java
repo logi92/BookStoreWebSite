@@ -208,4 +208,21 @@ public class BookServices {
 		dispatcher.forward(request, response);
 	}
 
+	public void search() throws ServletException, IOException {
+		String keyword = request.getParameter("keyWord");
+		List<Book> result = null;
+
+		if (keyword.equalsIgnoreCase("")) {
+			result = bookDAO.listAll();
+		} else {
+			result = bookDAO.search(keyword);
+		}
+
+		request.setAttribute("result", result);
+
+		String detailPage = "frontend/search_result.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(detailPage);
+		dispatcher.forward(request, response);
+	}
+
 }
