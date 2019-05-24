@@ -181,9 +181,7 @@ public class BookServices {
 
 		Category category = categoryDAO.get(categoryId);
 		List<Book> listBooks = bookDAO.listByCategory(categoryId);
-		List<Category> listCategory = categoryDAO.listAll();
 
-		request.setAttribute("listCategory", listCategory);
 		request.setAttribute("category", category);
 		request.setAttribute("listBooks", listBooks);
 
@@ -197,9 +195,7 @@ public class BookServices {
 		int bookId = Integer.parseInt(request.getParameter("id"));
 
 		Book book = bookDAO.get(bookId);
-		List<Category> listCategory = categoryDAO.listAll();
 
-		request.setAttribute("listCategory", listCategory);
 		request.setAttribute("book", book);
 
 		String detailPage = "frontend/book_detail.jsp";
