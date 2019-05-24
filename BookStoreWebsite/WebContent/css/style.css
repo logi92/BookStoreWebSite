@@ -1,85 +1,95 @@
 @charset "UTF-8";
 
 #headermenu {
-	display: table;
+    display: table;
 }
 
 #headermenu div {
-	display: table-cell;
-	padding-right: 20px;
+    display: table-cell;
+    padding-right: 20px;
 }
 
 #headermenu a:link {
-	font-size: larger;
+    font-size: larger;
 }
 
 a:link {
-	color: cornflowerBlue;
-	text-decoration: none;
+    color: cornflowerBlue;
+    text-decoration: none;
 }
 
 a:visited {
-	color: indigo;
+    color: indigo;
 }
 
 a:hover {
-	color: blue;
-	text-decoration: underline;
+    color: blue;
+    text-decoration: underline;
 }
 
 a:active {
-	color: red;
+    color: red;
 }
 
 .pageheading {
-	color: darkblue;
+    color: darkblue;
 }
 
 table {
-	border: 1px solid black;
-	border-collapse: collapse;
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 
 th, td {
-	padding: 8px;
+    padding: 8px;
 }
 
 th {
-	background: aqua;
-	color: navy;
-	font-size: larger;
+    background: aqua;
+    color: navy;
+    font-size: larger;
 }
 
 table.form {
-	border: 0;
-	padding: 4px;
+    border: 0;
+    padding: 4px;
 }
 
 button {
-	padding: 6px;
-	border-radius: 3px;
+    padding: 6px;
+    border-radius: 3px;
 }
 
 button[type=submit] {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 button:hover {
-	background-color: white;
+    background-color: white;
 }
 
 input {
-	border: 1px solid;
-	border-radius: 4px;
-	height: 20px;
+    border: 1px solid;
+    border-radius: 4px;
+    height: 20px;
 }
 
 .message {
-	font-style: italic;
+    font-style: italic;
 }
 
 .error {
-	color: red;
-	font-style: italic;
-	margin: 5px;
+    color: red;
+    font-style: italic;
+    margin: 5px;
+}
+
+div.center {
+    align: center;
+}
+
+div.book {
+    display: inline-block;
+    margin: 20px;
+    text-align: center;
 }
