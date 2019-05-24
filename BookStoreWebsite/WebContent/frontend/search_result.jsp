@@ -11,30 +11,26 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	<br />
-	<br />
-	<div align="center">
+	
+	<div class="center">
 		<c:if test="${fn:length(result)==0}">
 			<h2>No Results For "${keyword}"</h2>
 		</c:if>
 
 		<c:if test="${fn:length(result)>0}">
-			<div align="center" style="width: 80%; margin: 0 auto;">
+			<div class="book_group">
 				<center><h2>Results for: "${keyword}"</h2></center>
 				<c:forEach items="${result}" var="book">
 
 					<div>
-						<div style="display: inline-block; margin: 20px; width: 10%" align="left">
+						<div id="search_image">
 							<div>
-								<a href="view_book?id=${book.bookId}"> <img
-									src="data:image/jpg;base64,${book.base64Image}" width="128"
-									height="164" />
+								<a href="view_book?id=${book.bookId}"> <img class="book-small"
+									src="data:image/jpg;base64,${book.base64Image}"/>
 								</a>
 							</div>
 						</div>
-						<div
-							style="display: inline-block; margin: 20px; vertical-align: top; width: 60%"
-							align="left">
+						<div id="search_description">
 							<div>
 								<h2>
 									<a href="view_book?id=${book.bookId}"> <b>${book.title}</b>
@@ -47,7 +43,7 @@
 							</div>
 							<div>${fn:substring(book.description,0,100)}...</div>
 						</div>
-						<div style="display: inline-block; margin: 20px; vertical-align: top;">
+						<div id="search_price">
 							<h3><b>$${book.price}</b></h3>
 							<h3><a href="">Add To Cart</a></h3>
 						</div>

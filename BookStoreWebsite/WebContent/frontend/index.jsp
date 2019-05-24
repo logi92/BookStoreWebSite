@@ -12,16 +12,15 @@
 	<jsp:include page="header.jsp" />
 	<br />
 	<br />
-	<div align="center">
+	<div class="center">
 
-		<div align="center" style="width: 80%; margin: 0 auto;">
+		<div>
 			<h2>New Books</h2>
 			<c:forEach items="${listBooks}" var="book">
-				<div style="display: inline-block; margin: 20px">
+				<div class="book">
 					<div>
-						<a href="view_book?id=${book.bookId}"> <img
-							src="data:image/jpg;base64,${book.base64Image}" width="128"
-							height="164" />
+						<a href="view_book?id=${book.bookId}"> <img class="book-small" 
+							src="data:image/jpg;base64,${book.base64Image}"/>
 						</a>
 					</div>
 					<div>
@@ -38,10 +37,10 @@
 				</div>
 			</c:forEach>
 		</div>
-		<div align="center" style="clear: both">
+		<div class="next_row">
 			<h2>Best-Selling Books</h2>
 		</div>
-		<div align="center" style="clear: both">
+		<div class="next_row">
 			<h2>Favorite Books</h2>
 		</div>
 	</div>
