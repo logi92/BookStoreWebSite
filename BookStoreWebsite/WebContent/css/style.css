@@ -153,4 +153,17 @@ img.book-large {
 	display: inline-block;
 	margin: 20px;
 	vertical-align: top;
+    color: red;
+    font-style: italic;
+    margin: 5px;
+}
+
+div.center {
+    align: center;
+}
+
+div.book {
+    display: inline-block;
+    margin: 20px;
+    text-align: center;
 }

@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>${book.title}-OnlineBookStore</title>
 <link rel="stylesheet" href="css/style.css?v1">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 	<jsp:include page="header.jsp" />
