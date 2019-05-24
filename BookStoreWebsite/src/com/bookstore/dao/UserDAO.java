@@ -10,10 +10,6 @@ import com.bookstore.entity.Users;
 
 public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 
-	public UserDAO(EntityManager entityManager) {
-		super(entityManager);
-	}
-
 	public Users create(Users user) {
 		return super.create(user);
 	}
@@ -43,16 +39,18 @@ public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 	}
 
 	public boolean checkLogin(String email, String password) {
-		Map<String, Object> parameters = new HashMap<>(); //Эта мапа передастся в метод findWithNamedQuery
+		Map<String, Object> parameters = new HashMap<>(); // Эта мапа передастся в метод findWithNamedQuery
 		parameters.put("email", email);
-		parameters.put("password", password); //Суем в нее ключ - имя параметра, значение - значение параметра
+		parameters.put("password", password); // Суем в нее ключ - имя параметра, значение - значение параметра
 
-		List<Users> listUsers = super.findWithNamedQuery("Users.checkLogin", parameters); //Создаем список юзеров и присваиваем результат метода
-		
+		List<Users> listUsers = super.findWithNamedQuery("Users.checkLogin", parameters); // Создаем список юзеров и
+																							// присваиваем результат
+																							// метода
+
 		if (listUsers.size() == 1) {// Если данные ввели верно, то мы должны будем получить только одного юзера
 			return true;
 		}
-		
+
 		return false;
 	}
 

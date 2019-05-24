@@ -15,16 +15,14 @@ import com.bookstore.dao.UserDAO;
 import com.bookstore.entity.Users;
 
 public class UserServices {
-	private EntityManager entityManager;
 	private UserDAO userDAO;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 
-	public UserServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+	public UserServices(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
-		this.entityManager = entityManager;
-		userDAO = new UserDAO(entityManager);
+		userDAO = new UserDAO();
 	}
 
 //=================================================================>LIST
@@ -125,7 +123,7 @@ public class UserServices {
 			dispatcher.forward(request, response);
 		} else {
 			String message = "Login Failed!";
-			
+
 			request.setAttribute("message", message);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");

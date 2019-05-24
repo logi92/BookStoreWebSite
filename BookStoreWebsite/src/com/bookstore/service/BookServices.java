@@ -21,19 +21,17 @@ import com.bookstore.entity.Book;
 import com.bookstore.entity.Category;
 
 public class BookServices {
-	private EntityManager entityManager;
 	private BookDAO bookDAO;
 	private CategoryDAO categoryDAO;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 
-	public BookServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+	public BookServices(HttpServletRequest request, HttpServletResponse response) {
 		super();
-		this.entityManager = entityManager;
 		this.request = request;
 		this.response = response;
-		bookDAO = new BookDAO(entityManager);
-		categoryDAO = new CategoryDAO(entityManager);
+		bookDAO = new BookDAO();
+		categoryDAO = new CategoryDAO();
 	}
 
 //================================================================== LIST
@@ -193,6 +191,7 @@ public class BookServices {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(categoryPage);
 		dispatcher.forward(request, response);
 	}
+
 //================================================================== viewBookDetail
 	public void viewBookDetail() throws ServletException, IOException {
 		int bookId = Integer.parseInt(request.getParameter("id"));
@@ -207,6 +206,7 @@ public class BookServices {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(detailPage);
 		dispatcher.forward(request, response);
 	}
+
 //================================================================== search
 	public void search() throws ServletException, IOException {
 		String keyword = request.getParameter("keyword");
@@ -220,7 +220,7 @@ public class BookServices {
 
 		request.setAttribute("result", result);
 		request.setAttribute("keyword", keyword);
-		
+
 		String detailPage = "frontend/search_result.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(detailPage);
 		dispatcher.forward(request, response);

@@ -20,14 +20,13 @@ import org.junit.Test;
 import com.bookstore.entity.Book;
 import com.bookstore.entity.Category;
 
-public class BookDAOTest extends BaseDAOTest {
+public class BookDAOTest {
 
 	private static BookDAO bookDAO;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		BaseDAOTest.setUpBeforeClass();
-		bookDAO = new BookDAO(entityManager);
+		bookDAO = new BookDAO();
 	}
 
 	@Test
@@ -39,7 +38,7 @@ public class BookDAOTest extends BaseDAOTest {
 
 		newBook.setCategory(category);
 		newBook.setAuthor("Raoul-Gabriel Urma");
-		newBook.setTitle("Java 8 in Action: Lambdas, Streams, and functional-style programming");
+		newBook.setTitle("Java 8 in Action: Lambdas");
 		newBook.setDescription(
 				"ava 8 in Action is a clearly written guide to the new features of Java 8. The book covers lambdas, streams, and functional-style programming."
 						+ " With Java 8's functional features you can now write more concise code in less time, and also automatically benefit from multicore architectures."
@@ -221,7 +220,7 @@ public class BookDAOTest extends BaseDAOTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		BaseDAOTest.tearDownAfterClass();
+		bookDAO.close();
 	}
 
 }

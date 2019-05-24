@@ -16,18 +16,16 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.bookstore.dao.BaseDAOTest;
 import com.bookstore.dao.CategoryDAO;
 import com.bookstore.dao.UserDAO;
 import com.bookstore.entity.Users;
 
-public class UserDAOTest extends BaseDAOTest {
+public class UserDAOTest {
 	private static UserDAO userDAO;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		BaseDAOTest.setUpBeforeClass();
-		userDAO = new UserDAO(entityManager);
+		userDAO = new UserDAO();
 	}
 
 	@Test
@@ -141,7 +139,7 @@ public class UserDAOTest extends BaseDAOTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		BaseDAOTest.tearDownAfterClass();
+		userDAO.close();
 	}
 
 }
