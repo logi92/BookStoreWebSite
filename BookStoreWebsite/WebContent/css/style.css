@@ -53,6 +53,7 @@ th {
 table.form {
 	border: 0;
 	padding: 4px;
+	width: 80%;
 }
 
 button {
@@ -153,17 +154,17 @@ img.book-large {
 	display: inline-block;
 	margin: 20px;
 	vertical-align: top;
-    color: red;
-    font-style: italic;
-    margin: 5px;
+	color: red;
+	font-style: italic;
+	margin: 5px;
 }
 
 div.center {
-    align: center;
+	align: center;
 }
 
 div.book {
-    display: inline-block;
-    margin: 20px;
-    text-align: center;
+	display: inline-block;
+	margin: 20px;
+	text-align: center;
 }
