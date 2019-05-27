@@ -20,7 +20,7 @@
 			</c:if>
 		</div>
 		<form id="loginForm" action="login" method="post">
-			<table class="form">
+			<table >
 				<tr>
 					<td align="right">Email:</td>
 					<td align="left"><input type="text" id="email" name="email"

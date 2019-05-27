@@ -27,7 +27,7 @@
 			</a>
 		</div>
 		<div>
-			<a href="customers"> <img src="../images/customer.png" /><br />
+			<a href="list_customers"> <img src="../images/customer.png" /><br />
 				Customers
 			</a>
 		</div>
