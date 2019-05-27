@@ -19,7 +19,7 @@ public class CustomerServices {
 	public CustomerServices(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
-		customerDAO = new CustomerDAO();
+		this.customerDAO = new CustomerDAO();
 	}
 
 	public void listCustomers() throws ServletException, IOException {
@@ -38,6 +38,40 @@ public class CustomerServices {
 		String listPage = "customer_list.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(listPage);
 		dispatcher.forward(request, response);
+	}
+
+	public void createCustomer() throws IOException, ServletException {
+		String email = request.getParameter("email");
+		String fullName = request.getParameter("fullname");
+		String password = request.getParameter("password");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String city = request.getParameter("city");
+		String zipCode = request.getParameter("zipCode");
+		String country = request.getParameter("country");
+
+		Customer existedCustomer = customerDAO.findByEmail(email);
+
+		if (existedCustomer != null) {
+			String message = "Could not create Customer. A Customer with email \"" + email + "\" already exists!";
+			listCustomers(message);
+		} else {
+			Customer newCustomer = new Customer();
+
+			newCustomer.setEmail(email);
+			newCustomer.setFullname(fullName);
+			newCustomer.setPassword(password);
+			newCustomer.setPhoneNumber(phone);
+			newCustomer.setAddress(address);
+			newCustomer.setCity(city);
+			newCustomer.setZipCode(zipCode);
+			newCustomer.setCountry(country);
+
+			customerDAO.create(newCustomer);
+
+			String message = "A new Customer has been created successfully!";
+			listCustomers(message);
+		}
 	}
 
 }
