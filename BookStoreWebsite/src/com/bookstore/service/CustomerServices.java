@@ -1,6 +1,9 @@
 package com.bookstore.service;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +25,7 @@ public class CustomerServices {
 		this.customerDAO = new CustomerDAO();
 	}
 
+	// ================================================================== LIST
 	public void listCustomers() throws ServletException, IOException {
 		listCustomers(null);
 	}
@@ -40,7 +44,64 @@ public class CustomerServices {
 		dispatcher.forward(request, response);
 	}
 
+	// ================================================================== CREATE
 	public void createCustomer() throws IOException, ServletException {
+		String email = request.getParameter("email");
+
+		Customer existedCustomer = customerDAO.findByEmail(email);
+
+		if (existedCustomer != null) {
+			String message = "Could not create Customer. A Customer with email \"" + email + "\" already exists!";
+			listCustomers(message);
+		} else {
+			Customer newCustomer = new Customer();
+			readCustomerFields(newCustomer);
+
+			customerDAO.create(newCustomer);
+
+			String message = "A new Customer has been created successfully!";
+			listCustomers(message);
+		}
+	}
+
+	// ================================================================== UPDATE
+	public void updateCustomer() throws ServletException, IOException {
+		String email = request.getParameter("email");
+		int customerId = Integer.parseInt(request.getParameter("customerId"));
+
+		Customer customerByEmail = customerDAO.findByEmail(email);
+		Customer customerById = customerDAO.get(customerId);
+
+		String message = null;
+		if (customerByEmail != null && !customerByEmail.equals(customerById)) {
+			message = "Could not update the Customer, because there's an existing customer having the same email";
+		} else {
+			readCustomerFields(customerById);
+
+			customerDAO.update(customerById);
+
+			message = "The Customer has been updated successfully!";
+		}
+
+		listCustomers(message);
+	}
+
+	// ================================================================== EDIT
+	public void editCustomer() throws ServletException, IOException {
+		int customerId = Integer.parseInt(request.getParameter("id"));
+
+		Customer customer = customerDAO.get(customerId);
+
+		request.setAttribute("customer", customer);
+
+		String editPage = "customer_form.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(editPage);
+		dispatcher.forward(request, response);
+	}
+
+	// ================================================================== READ ALL
+	// FIELDS
+	public void readCustomerFields(Customer customer) {
 		String email = request.getParameter("email");
 		String fullName = request.getParameter("fullname");
 		String password = request.getParameter("password");
@@ -50,28 +111,14 @@ public class CustomerServices {
 		String zipCode = request.getParameter("zipCode");
 		String country = request.getParameter("country");
 
-		Customer existedCustomer = customerDAO.findByEmail(email);
-
-		if (existedCustomer != null) {
-			String message = "Could not create Customer. A Customer with email \"" + email + "\" already exists!";
-			listCustomers(message);
-		} else {
-			Customer newCustomer = new Customer();
-
-			newCustomer.setEmail(email);
-			newCustomer.setFullname(fullName);
-			newCustomer.setPassword(password);
-			newCustomer.setPhoneNumber(phone);
-			newCustomer.setAddress(address);
-			newCustomer.setCity(city);
-			newCustomer.setZipCode(zipCode);
-			newCustomer.setCountry(country);
-
-			customerDAO.create(newCustomer);
-
-			String message = "A new Customer has been created successfully!";
-			listCustomers(message);
-		}
+		customer.setEmail(email);
+		customer.setFullname(fullName);
+		customer.setPassword(password);
+		customer.setPhoneNumber(phone);
+		customer.setAddress(address);
+		customer.setCity(city);
+		customer.setZipCode(zipCode);
+		customer.setCountry(country);
 	}
 
 }

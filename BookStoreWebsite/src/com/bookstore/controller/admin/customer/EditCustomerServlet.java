@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.bookstore.service.CustomerServices;
 
 /**
- * Servlet implementation class CreateCustomerServlet
+ * Servlet implementation class EditCustomerServlet
  */
-@WebServlet("/admin/create_customer")
-public class CreateCustomerServlet extends HttpServlet {
+@WebServlet("/admin/edit_customer")
+public class EditCustomerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CustomerServices customerServices = new CustomerServices(request, response);
 		customerServices.editCustomer();
 	}

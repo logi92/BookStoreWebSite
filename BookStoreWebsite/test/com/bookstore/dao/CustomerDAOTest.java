@@ -40,7 +40,7 @@ public class CustomerDAOTest {
 	public void testUpdateCustomer() {
 		Customer customer = customerDAO.get(2);
 		customer.setEmail("tom@mail.ru");
-		customer.setFullname("Tom Eager");
+		customer.setFullname("Tommyr");
 		customer.setAddress("100 North Av.");
 		customer.setCity("New York");
 		customer.setCountry("USA");
