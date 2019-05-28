@@ -124,13 +124,13 @@ public class CustomerServices {
 	// ================================================================== DELETE
 	public void deleteCustomer() throws ServletException, IOException {
 		int customerId = Integer.parseInt(request.getParameter("id"));
-		
+
 		customerDAO.delete(customerId);
-		
+
 		String message = "The Customer has been delete successfully";
 		listCustomers(message);
 	}
-	
+
 	// ================================================================== REGISTER
 	public void registerCustomer() throws IOException, ServletException {
 		String email = request.getParameter("email");
@@ -138,7 +138,7 @@ public class CustomerServices {
 		Customer existedCustomer = customerDAO.findByEmail(email);
 
 		String message = null;
-		
+
 		if (existedCustomer != null) {
 			message = "Could not register Customer. A Customer with email \"" + email + "\" already exists!";
 		} else {
@@ -149,12 +149,40 @@ public class CustomerServices {
 
 			message = "You have registered successfully!</br> <a href='login'> Click here</a> to login";
 		}
-		
+
 		request.setAttribute("message", message);
-		
+
 		String messagePage = "frontend/message.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(messagePage);
 		dispatcher.forward(request, response);
+	}
+
+	// ================================================================== Show Login
+	// Page
+
+	public void showLogin() throws ServletException, IOException {
+		String loginPath = "frontend/login.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(loginPath);
+		dispatcher.forward(request, response);
+	}
+
+	// ================================================================== DO LOGIN
+	public void doLogin() throws ServletException, IOException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+
+		Customer customer = customerDAO.checkLogin(email, password);
+
+		String message = null;
+		if (customer == null) {
+			message = "Login Failed , please check your email and password";
+			request.setAttribute("message", message);
+			showLogin();
+		} else {
+			String profilePath = "frontend/customer_profile.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(profilePath);
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

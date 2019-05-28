@@ -83,28 +83,48 @@ public class CustomerDAOTest {
 
 		assertFalse(listCustomers.isEmpty());
 	}
-	
+
 	@Test
 	public void testCountAll() {
 		long totalCustomers = customerDAO.count();
 		assertEquals(2, totalCustomers);
 	}
-	
+
 	@Test
 	public void TestByEmailSuccessfull() {
-		String email ="tom@mail.ru";
+		String email = "tom@mail.ru";
 		Customer customer = customerDAO.findByEmail(email);
-		
+
 		System.out.println(customer.getFullname());
-		
+
+		assertNotNull(customer);
+	}
+
+	@Test
+	public void TestByEmailFail() {
+		String email = "tm@mail.ru";
+		Customer customer = customerDAO.findByEmail(email);
+
+		assertNull(customer);
+	}
+
+	@Test
+	public void testCheckLogin() {
+		String email = "david@mail.ru";
+		String password = "123";
+		Customer customer = customerDAO.checkLogin(email, password);
+
+		System.out.println(customer.getFullname());
+
 		assertNotNull(customer);
 	}
 	
 	@Test
-	public void TestByEmailFail() {
-		String email ="tm@mail.ru";
-		Customer customer = customerDAO.findByEmail(email);
-		
+	public void testCheckLoginFail() {
+		String email = "da1vid@mail.ru";
+		String password = "123";
+		Customer customer = customerDAO.checkLogin(email, password);
+
 		assertNull(customer);
 	}
 
