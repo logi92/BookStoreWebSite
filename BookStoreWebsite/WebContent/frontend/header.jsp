@@ -13,8 +13,8 @@
 			
 		&nbsp;&nbsp;&nbsp;&nbsp; 
 		
-			<a href="">Sign In</a> |
-			<a href="">Register</a> | 
+			<a href="login">Sign In</a> |
+			<a href="register">Register</a> | 
 			<a href="">Cart</a>
 		</form>
 	</div>

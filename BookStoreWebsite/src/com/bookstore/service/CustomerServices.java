@@ -121,6 +121,7 @@ public class CustomerServices {
 		customer.setCountry(country);
 	}
 
+	// ================================================================== DELETE
 	public void deleteCustomer() throws ServletException, IOException {
 		int customerId = Integer.parseInt(request.getParameter("id"));
 		
@@ -128,6 +129,32 @@ public class CustomerServices {
 		
 		String message = "The Customer has been delete successfully";
 		listCustomers(message);
+	}
+	
+	// ================================================================== REGISTER
+	public void registerCustomer() throws IOException, ServletException {
+		String email = request.getParameter("email");
+
+		Customer existedCustomer = customerDAO.findByEmail(email);
+
+		String message = null;
+		
+		if (existedCustomer != null) {
+			message = "Could not register Customer. A Customer with email \"" + email + "\" already exists!";
+		} else {
+			Customer newCustomer = new Customer();
+			readCustomerFields(newCustomer);
+
+			customerDAO.create(newCustomer);
+
+			message = "You have registered successfully!</br> <a href='login'> Click here</a> to login";
+		}
+		
+		request.setAttribute("message", message);
+		
+		String messagePage = "frontend/message.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(messagePage);
+		dispatcher.forward(request, response);
 	}
 
 }
