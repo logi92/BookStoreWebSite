@@ -102,6 +102,10 @@ table.book {
 	margin: 0 auto;
 }
 
+table.customer {
+	border: 0;
+}
+
 div.book_group {
 	width: 80%;
 	margin: 0 auto;
