@@ -180,10 +180,15 @@ public class CustomerServices {
 			showLogin();
 		} else {
 			request.getSession().setAttribute("loggedCustomer", customer);
-			String profilePath = "frontend/customer_profile.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(profilePath);
-			dispatcher.forward(request, response);
+			showCustomerProfile();
 		}
+	}
+	
+	// ================================================================== ShowCustmerProfile
+	public void showCustomerProfile() throws ServletException, IOException {
+		String profilePath = "frontend/customer_profile.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(profilePath);
+		dispatcher.forward(request, response);
 	}
 
 }
