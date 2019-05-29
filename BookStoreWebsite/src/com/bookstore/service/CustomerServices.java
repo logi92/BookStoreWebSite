@@ -110,10 +110,17 @@ public class CustomerServices {
 		String city = request.getParameter("city");
 		String zipCode = request.getParameter("zipCode");
 		String country = request.getParameter("country");
-
-		customer.setEmail(email);
+		
+		if(email!=null && !email.equals("")) {
+			customer.setEmail(email);
+		}
+		
 		customer.setFullname(fullName);
-		customer.setPassword(password);
+		
+		if(password!=null && !password.equals("")) {
+			customer.setPassword(password);
+		}
+		
 		customer.setPhoneNumber(phone);
 		customer.setAddress(address);
 		customer.setCity(city);
@@ -191,10 +198,22 @@ public class CustomerServices {
 		dispatcher.forward(request, response);
 	}
 
+	// ================================================================== ShowCustomerProfileEditForm
 	public void showCustomerProfileEditForm() throws ServletException, IOException {
 		String editePath = "frontend/edit_profile.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(editePath);
 		dispatcher.forward(request, response);
+	}
+
+	// ================================================================== UpdateCustomerProfile
+	public void updateCustomerProfile() throws ServletException, IOException {
+		Customer customer = (Customer) request.getSession().getAttribute("loggedCustomer");	
+		
+		readCustomerFields(customer);
+		
+		customerDAO.update(customer);
+		
+		showCustomerProfile();
 	}
 
 }

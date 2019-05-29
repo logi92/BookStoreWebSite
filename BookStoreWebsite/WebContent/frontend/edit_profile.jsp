@@ -18,7 +18,7 @@
 	</div>
 
 	<div align="center">
-		<form action="update_customer" method="post" id="customerForm">
+		<form action="update_profile" method="post" id="customerForm">
 			<table class="form">
 				<tr>
 					<td align="right">E-mail Address:</td>
