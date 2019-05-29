@@ -191,4 +191,10 @@ public class CustomerServices {
 		dispatcher.forward(request, response);
 	}
 
+	public void showCustomerProfileEditForm() throws ServletException, IOException {
+		String editePath = "frontend/edit_profile.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(editePath);
+		dispatcher.forward(request, response);
+	}
+
 }
