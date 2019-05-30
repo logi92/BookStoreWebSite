@@ -37,7 +37,7 @@ public class ReviewDAOTest {
 		review.setCustomer(customer);
 		review.setComment("This is big comment! It'is true!");
 		review.setHeadline("Second Headline, should be First");
-		review.setRating(3);
+		review.setRating(1);
 
 		Review result = reviewDAO.create(review);
 
