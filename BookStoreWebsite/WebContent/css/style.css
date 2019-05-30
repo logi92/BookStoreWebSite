@@ -102,6 +102,10 @@ table.book {
 	margin: 0 auto;
 }
 
+table.normal {
+	border: 0;
+}
+
 table.customer {
 	border: 0;
 }
