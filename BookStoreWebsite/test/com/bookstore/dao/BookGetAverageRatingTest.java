@@ -24,7 +24,7 @@ public class BookGetAverageRatingTest {
 
 		assertEquals(0.0, averageRating, 0.0);
 	}
-	
+
 	@Test
 	public void testGetAverageRating1() {
 		Book book = new Book();
@@ -33,16 +33,16 @@ public class BookGetAverageRatingTest {
 
 		Review review1 = new Review();
 		review1.setRating(5);
-		
+
 		reviews.add(review1);
-		
+
 		book.setReviews(reviews);
-		
+
 		float averageRating = book.getAverageRating();
 
 		assertEquals(5.0, averageRating, 0.0);
 	}
-	
+
 	@Test
 	public void testGetAverageRating2() {
 		Book book = new Book();
@@ -51,20 +51,20 @@ public class BookGetAverageRatingTest {
 
 		Review review1 = new Review();
 		review1.setRating(5);
-		
+
 		Review review2 = new Review();
 		review2.setRating(2);
-		
+
 		reviews.add(review1);
 		reviews.add(review2);
-		
+
 		book.setReviews(reviews);
-		
+
 		float averageRating = book.getAverageRating();
 
 		assertEquals(3.5, averageRating, 0.0);
 	}
-	
+
 	@Test
 	public void testGetAverageRating3() {
 		Book book = new Book();
@@ -73,22 +73,33 @@ public class BookGetAverageRatingTest {
 
 		Review review1 = new Review();
 		review1.setRating(5);
-		
+
 		Review review2 = new Review();
 		review2.setRating(2);
-		
+
 		Review review3 = new Review();
 		review3.setRating(2);
-		
+
 		reviews.add(review1);
 		reviews.add(review2);
 		reviews.add(review3);
-		
+
 		book.setReviews(reviews);
-		
+
 		float averageRating = book.getAverageRating();
 
 		assertEquals(3.0, averageRating, 0.0);
 	}
 
+	@Test
+	public void testGetStringRating() {
+		float averageRating = 0.5f;
+
+		Book book = new Book();
+
+		String actual = book.getRatingString(averageRating);
+		String expected = "half,off,off,off,off";
+
+		assertEquals(expected, actual);
+	}
 }
