@@ -68,4 +68,13 @@ public class ReviewServices {
 		listAllReviews(message);
 	}
 
+	public void deleteReview() throws ServletException, IOException {
+		int reviewId = Integer.parseInt(request.getParameter("id"));
+		
+		reviewDAO.delete(reviewId);
+
+		String message = "Review has been deleted successfully";
+		listAllReviews(message);
+	}
+
 }
