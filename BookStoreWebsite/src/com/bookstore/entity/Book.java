@@ -180,7 +180,7 @@ public class Book implements java.io.Serializable {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "book")
 	public Set<Review> getReviews() {
 		return this.reviews;
 	}
@@ -225,6 +225,13 @@ public class Book implements java.io.Serializable {
 		averageRating = sum / reviews.size();
 
 		return averageRating;
+	}
+
+	@Transient
+	public String getRatingStars() {
+		float averageRating = getAverageRating();
+
+		return getRatingString(averageRating);
 	}
 
 	@Transient
