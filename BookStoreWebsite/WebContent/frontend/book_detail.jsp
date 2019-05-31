@@ -8,8 +8,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>${book.title}-OnlineBookStore</title>
-<link rel="stylesheet" href="css/style.css?v1">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -25,8 +25,8 @@
 				<td rowspan="2"><img class="book-large"
 					src="data:image/jpg;base64,${book.base64Image}" /></td>
 				<td valign="top" align="left"><jsp:directive.include
-						file="book_rating.jsp" /> <a href="#reviews">${fn:length(book.reviews)} Reviews</a>
-				</td>
+						file="book_rating.jsp" /> <a href="#reviews">${fn:length(book.reviews)}
+						Reviews</a></td>
 				<td valign="top" rowspan="2" width="20%">
 					<h2>$${book.price}</h2> <br />
 					<button type="submit">Add To Cart</button>
@@ -38,7 +38,7 @@
 			<tr>
 				<td><a id="reviews"><h2>Customer Reviews</h2></a></td>
 				<td colspan="2" align="center">
-					<button>Write a Customer Review</button>
+					<button id="buttonWriteReview">Write a Customer Review</button>
 				</td>
 			</tr>
 
@@ -76,4 +76,11 @@
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#buttonWriteReview").click(function() {
+			window.location='write_review?book_id='+${book.bookId};
+		});
+	});
+</script>
 </html>

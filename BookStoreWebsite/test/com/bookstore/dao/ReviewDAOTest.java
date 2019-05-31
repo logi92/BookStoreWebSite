@@ -83,21 +83,43 @@ public class ReviewDAOTest {
 
 		assertTrue(result.size() > 0);
 	}
-	
+
 	@Test
 	public void testCountAll() {
 		long result = reviewDAO.count();
-		
+
 		assertEquals(2, result);
 	}
-	
+
 	@Test
 	public void testDelete() {
 		int reviewId = 2;
-		
+
 		reviewDAO.delete(reviewId);
-		
+
 		Review review = reviewDAO.get(reviewId);
+
+		assertNull(review);
+	}
+
+	@Test
+	public void testFindByCustomerAndBook() {
+		int customerId = 2;
+		int bookId = 4;
+		
+		Review review = reviewDAO.findByCustomerAndBook(customerId, bookId);
+		
+		System.out.println(review.getHeadline());
+		
+		assertNotNull(review);
+	}
+	
+	@Test
+	public void testFindByCustomerAndBookFail() {
+		int customerId = 4;
+		int bookId = 4;
+		
+		Review review = reviewDAO.findByCustomerAndBook(customerId, bookId);
 		
 		assertNull(review);
 	}

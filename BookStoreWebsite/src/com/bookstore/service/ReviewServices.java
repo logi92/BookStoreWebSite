@@ -8,7 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bookstore.dao.BookDAO;
 import com.bookstore.dao.ReviewDAO;
+import com.bookstore.entity.Book;
 import com.bookstore.entity.Review;
 
 public class ReviewServices {
@@ -75,6 +77,20 @@ public class ReviewServices {
 
 		String message = "Review has been deleted successfully";
 		listAllReviews(message);
+	}
+
+	public void showReviewForm() throws ServletException, IOException {
+		int bookId = Integer.parseInt(request.getParameter("book_id"));
+		
+		BookDAO bookDAO = new BookDAO();
+		
+		Book book = bookDAO.get(bookId);
+		
+		request.setAttribute("book", book);
+		
+		String targetPage = "frontend/review_form.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(targetPage);
+		dispatcher.forward(request, response);
 	}
 
 }
