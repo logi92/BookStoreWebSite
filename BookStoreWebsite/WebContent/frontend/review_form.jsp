@@ -33,7 +33,7 @@
 					<td>
 						<div id="rateYo"></div>
 						<input type="hidden" id="rating" name="rating"/>
-						<input type="hidden" name="bookId" id="bookId" value="${book.bookId}"/>
+						<input type="hidden" name="bookId" value="${book.bookId}"/>
 						<br/>
 						<input type="text" name="headline" id="headline" size = "49" placeholder="Headline or summary for your review (required)">
 						<br/><br/>
@@ -73,11 +73,10 @@
 		});
 		
 		 $("#rateYo").rateYo({
-			    rating: 5,
 			    fullStar: true,
 			    starWidth: "25px",
 			    onSet: function(rating,rateYoInstance){
-			    	$("#rating"),val(rating);
+			    	$("#rating").val(rating);
 			    }
 		});
 		
