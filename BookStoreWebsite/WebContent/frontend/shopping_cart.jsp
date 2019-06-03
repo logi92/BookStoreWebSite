@@ -53,9 +53,9 @@
 								</td>
 								<td>${item.value}</td>
 								<td><fmt:formatNumber value="${item.key.price}"
-										type="currency" /></td>
+										type="currency" currencySymbol="$"/></td>
 								<td><fmt:formatNumber
-										value="${item.value * item.key.price}" type="currency" /></td>
+										value="${item.value * item.key.price}" type="currency" currencySymbol="$"/></td>
 								<td><a href="">Remove</a></td>
 							</tr>
 						</c:forEach>
@@ -67,7 +67,7 @@
 							<td><b>${cart.totalQuantity} book(s)</b></td>
 							<td>Total:</td>
 							<td colspan="2"><fmt:formatNumber value="${cart.totalAmount}"
-									type="currency" /></td>
+									type="currency" currencySymbol="$"/></td>
 						</tr>
 					</table>
 				</form>
