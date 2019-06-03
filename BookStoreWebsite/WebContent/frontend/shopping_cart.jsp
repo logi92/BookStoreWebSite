@@ -30,8 +30,8 @@
 		</c:if>
 
 		<c:if test="${cart.totalItems>0}">
-			<div>
-				<form action="">
+			<form action="update_cart" method="post" id="cartForm">
+				<div>
 					<table border="1">
 						<tr>
 							<th>No</th>
@@ -44,18 +44,19 @@
 						<c:forEach items="${cart.items}" var="item" varStatus="status">
 							<tr>
 								<td>${status.index+1}</td>
-								<td>
-								<img class="book-small" src="data:image/jpg;base64,${item.key.base64Image}"/>
+								<td><img class="book-small"
+									src="data:image/jpg;base64,${item.key.base64Image}" /></td>
+								<td>&nbsp;&nbsp; <span id="book-title">${item.key.title}</span>
 								</td>
 								<td>
-								&nbsp;&nbsp;
-								<span id="book-title">${item.key.title}</span>
-								</td>
-								<td>${item.value}</td>
+								<input type="hidden" name="bookId" value = "${item.key.bookId}"/>
+								<input type="text" name="quantity${status.index+1}"
+									value="${item.value}" size="5" /></td>
 								<td><fmt:formatNumber value="${item.key.price}"
-										type="currency" currencySymbol="$"/></td>
+										type="currency" currencySymbol="$" /></td>
 								<td><fmt:formatNumber
-										value="${item.value * item.key.price}" type="currency" currencySymbol="$"/></td>
+										value="${item.value * item.key.price}" type="currency"
+										currencySymbol="$" /></td>
 								<td><a href="remove_from_cart?book_id=${item.key.bookId}">Remove</a></td>
 							</tr>
 						</c:forEach>
@@ -66,12 +67,23 @@
 							<td></td>
 							<td><b>${cart.totalQuantity} book(s)</b></td>
 							<td>Total:</td>
-							<td colspan="2"><fmt:formatNumber value="${cart.totalAmount}"
-									type="currency" currencySymbol="$"/></td>
+							<td colspan="2"><fmt:formatNumber
+									value="${cart.totalAmount}" type="currency" currencySymbol="$" /></td>
 						</tr>
 					</table>
-				</form>
-			</div>
+				</div>
+				<div>
+					<table class="normal">
+						<tr>
+							<td></td>
+							<td><button type="submit">Update</button></td>
+							<td><a href="${pageContext.request.contextPath}/">Continue
+									Shopping</a></td>
+							<td><a href="">Checkout</a></td>
+						</tr>
+					</table>
+				</div>
+			</form>
 		</c:if>
 	</div>
 
@@ -79,21 +91,21 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#loginForm").validate({
+		$("#cartForm").validate({
 			rules : {
-				email : {
-					required : true,
-					email : true,
-				},
-				password : "required",
+				<c:forEach items="${cart.items}" var="item" varStatus="status">
+					quantity${status.index + 1}: {required:true, number:true, min :1},
+				</c:forEach>
 			},
+			
 			messages : {
-				email : {
-					required : "Please Enter Email",
-					email : "Please Enter an Valid Email address",
-				},
-				password : "Please Enter Password",
-			},
+				<c:forEach items="${cart.items}" var="item" varStatus="status">
+					quantity${status.index + 1}: {required: "Please Enter Quantity",
+					number: "Must be Number",
+					min: "Must be more than 0"
+					},
+			</c:forEach>
+			}
 		});
 	});
 </script>
