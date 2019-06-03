@@ -22,7 +22,7 @@
 				<a href="view_orders">My Orders</a> | 
 				<a href="logout">Logout</a> |
 			</c:if>
-			<a href="">Cart</a>
+			<a href="view_cart">Cart</a>
 		</form>
 	</div>
 	
