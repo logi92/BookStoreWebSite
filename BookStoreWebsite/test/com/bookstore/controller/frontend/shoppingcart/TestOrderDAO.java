@@ -3,6 +3,7 @@ package com.bookstore.controller.frontend.shoppingcart;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -98,8 +99,52 @@ public class TestOrderDAO {
 	}
 
 	@Test
-	public void testUpdateBookOrder() {
+	public void testUpdateBookOrderShippingAddress() {
+		Integer orderId = 7;
+		BookOrder order = orderDAO.get(orderId);
+		order.setShippingAddress("New Address");
 
+		BookOrder updatedOrder = orderDAO.update(order);
+
+		assertEquals(order.getShippingAddress(), updatedOrder.getShippingAddress());
+	}
+
+	@Test
+	public void testUpdateBookOrderDetail() {
+		Integer orderId = 8;
+		BookOrder order = orderDAO.get(orderId);
+
+		Iterator<OrderDetail> iterator = order.getOrderDetails().iterator();
+
+		while (iterator.hasNext()) {
+			OrderDetail orderDetail = iterator.next();
+			if (orderDetail.getBook().getBookId() == 7) {
+				orderDetail.setQuantity(3);
+				orderDetail.setSubTotal(81.99f);
+			}
+		}
+
+		orderDAO.update(order);
+
+		BookOrder updatedOrder = orderDAO.get(orderId);
+
+		iterator = order.getOrderDetails().iterator();
+
+		int expectedQuantity = 3;
+		float expectedSubtotal = 81.99f;
+		int actualQuantity = 0;
+		float actualSubtotal = 0;
+
+		while (iterator.hasNext()) {
+			OrderDetail orderDetail = iterator.next();
+			if (orderDetail.getBook().getBookId() == 7) {
+				actualQuantity = orderDetail.getQuantity();
+				actualSubtotal = orderDetail.getSubTotal();
+			}
+		}
+
+		assertEquals(expectedQuantity, actualQuantity);
+		assertEquals(expectedSubtotal, actualSubtotal, 0.0f);
 	}
 
 	@Test

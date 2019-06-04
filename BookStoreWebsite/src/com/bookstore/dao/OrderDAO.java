@@ -17,8 +17,7 @@ public class OrderDAO extends JpaDAO<BookOrder> implements GenericDAO<BookOrder>
 
 	@Override
 	public BookOrder update(BookOrder order) {
-		// TODO Auto-generated method stub
-		return null;
+		return super.update(order);
 	}
 
 	@Override
