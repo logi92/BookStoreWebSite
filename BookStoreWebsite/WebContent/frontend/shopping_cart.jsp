@@ -39,7 +39,7 @@
 							<th>Quantity</th>
 							<th>Price</th>
 							<th>Subtotal</th>
-							<th><a href=""><b>Clear Cart</b></a></th>
+							<th></th>
 						</tr>
 						<c:forEach items="${cart.items}" var="item" varStatus="status">
 							<tr>
@@ -48,10 +48,9 @@
 									src="data:image/jpg;base64,${item.key.base64Image}" /></td>
 								<td>&nbsp;&nbsp; <span id="book-title">${item.key.title}</span>
 								</td>
-								<td>
-								<input type="hidden" name="bookId" value = "${item.key.bookId}"/>
-								<input type="text" name="quantity${status.index+1}"
-									value="${item.value}" size="5" /></td>
+								<td><input type="hidden" name="bookId"
+									value="${item.key.bookId}" /> <input type="text"
+									name="quantity${status.index+1}" value="${item.value}" size="5" /></td>
 								<td><fmt:formatNumber value="${item.key.price}"
 										type="currency" currencySymbol="$" /></td>
 								<td><fmt:formatNumber
@@ -75,8 +74,12 @@
 				<div>
 					<table class="normal">
 						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
 							<td></td>
 							<td><button type="submit">Update</button></td>
+							<td><input type="button" id="clearCart" value="Clear Cart"/></td>
 							<td><a href="${pageContext.request.contextPath}/">Continue
 									Shopping</a></td>
 							<td><a href="">Checkout</a></td>
@@ -91,6 +94,10 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("#clearCart").click(function() {
+			window.location = 'clear_cart';
+		});
+		
 		$("#cartForm").validate({
 			rules : {
 				<c:forEach items="${cart.items}" var="item" varStatus="status">
