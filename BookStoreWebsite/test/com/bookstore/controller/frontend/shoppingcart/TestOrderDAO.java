@@ -41,19 +41,58 @@ public class TestOrderDAO {
 
 		Book book = new Book(2);
 		orderDetail.setBook(book);
+		orderDetail.setQuantity(2);
+		orderDetail.setSubTotal(87.72f);
+		orderDetail.setBookOrder(order);
 
-		OrderDetailId orderDetailId = new OrderDetailId();
-		orderDetailId.setQuantity(2);
-		orderDetailId.setSubTotal(87.72f);
-
-		orderDetail.setId(orderDetailId);
 		orderDetails.add(orderDetail);
 
 		order.setOrderDetails(orderDetails);
 
 		BookOrder saveOrder = orderDAO.create(order);
 
-		assertNotNull(saveOrder);
+		assertTrue(order.getOrderId() > 0);
+
+	}
+
+	@Test
+	public void testCreateBookOrder2() {
+		BookOrder order = new BookOrder();
+
+		Customer customer = new Customer();
+		customer.setCustomerId(24);
+
+		order.setCustomer(customer);
+		order.setRecipientName("Ruslan");
+		order.setRecipientPhone("12345678");
+		order.setShippingAddress("g Kulebaki mkr Zapad d21");
+
+		Set<OrderDetail> orderDetails = new HashSet<>();
+		OrderDetail orderDetail1 = new OrderDetail();
+
+		Book book1 = new Book(8);
+		orderDetail1.setBook(book1);
+		orderDetail1.setQuantity(1);
+		orderDetail1.setSubTotal(33.29f);
+		orderDetail1.setBookOrder(order);
+
+		orderDetails.add(orderDetail1);
+
+		OrderDetail orderDetail2 = new OrderDetail();
+
+		Book book2 = new Book(7);
+		orderDetail2.setBook(book2);
+		orderDetail2.setQuantity(1);
+		orderDetail2.setSubTotal(27.33f);
+		orderDetail2.setBookOrder(order);
+
+		orderDetails.add(orderDetail2);
+
+		order.setOrderDetails(orderDetails);
+
+		BookOrder saveOrder = orderDAO.create(order);
+
+		assertTrue(order.getOrderId() > 0 && order.getOrderDetails().size() == 2);
 
 	}
 

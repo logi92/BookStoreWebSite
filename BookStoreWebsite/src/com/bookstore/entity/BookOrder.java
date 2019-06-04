@@ -4,6 +4,8 @@ package com.bookstore.entity;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -150,7 +152,7 @@ public class BookOrder implements java.io.Serializable {
 		this.orderStatus = orderStatus;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bookOrder")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bookOrder", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<OrderDetail> getOrderDetails() {
 		return this.orderDetails;
 	}
