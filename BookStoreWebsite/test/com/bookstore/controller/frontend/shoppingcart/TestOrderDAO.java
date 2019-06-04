@@ -34,9 +34,9 @@ public class TestOrderDAO {
 		customer.setCustomerId(2);
 
 		order.setCustomer(customer);
-		order.setRecipientName("Ruslan");
-		order.setRecipientPhone("12345678");
-		order.setShippingAddress("g Kulebaki mkr Zapad d21");
+		order.setRecipientName("Andrey");
+		order.setRecipientPhone("987654321");
+		order.setShippingAddress("NiNo Big House 001");
 
 		Set<OrderDetail> orderDetails = new HashSet<>();
 		OrderDetail orderDetail = new OrderDetail();
