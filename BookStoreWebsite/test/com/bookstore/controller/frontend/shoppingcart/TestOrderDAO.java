@@ -3,6 +3,7 @@ package com.bookstore.controller.frontend.shoppingcart;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.AfterClass;
@@ -98,7 +99,7 @@ public class TestOrderDAO {
 
 	@Test
 	public void testUpdateBookOrder() {
-		
+
 	}
 
 	@Test
@@ -116,7 +117,21 @@ public class TestOrderDAO {
 
 	@Test
 	public void testListAll() {
-		fail("Not yet implemented");
+		List<BookOrder> listOrders = orderDAO.listAll();
+
+		for (BookOrder order : listOrders) {
+			System.out.println(order.getOrderId() + " - " + order.getCustomer().getFullname());
+
+			for (OrderDetail detail : order.getOrderDetails()) {
+				Book book = detail.getBook();
+				int quantity = detail.getQuantity();
+				float subtotal = detail.getSubTotal();
+
+				System.out.println("\t" + book.getTitle() + " - " + quantity + " - " + subtotal);
+			}
+		}
+
+		assertTrue(listOrders.size() == 2);
 	}
 
 	@Test
