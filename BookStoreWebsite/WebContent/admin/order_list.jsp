@@ -47,7 +47,7 @@
 					<td>${order.orderStatus}</td>
 					<td> <fmt:formatDate pattern="MM/dd/yyyy HH:mm" value="${order.orderDate}" /> </td>
 					<td>
-						<a href="edit_detail?id=${order.orderId}">Details</a> 
+						<a href="view_order?id=${order.orderId}">Details</a> 
 						<a href="edit_order?id=${order.orderId}">Edit</a> 
 						<a href="javascript:void(0);" class="deleteLink" id="${order.orderId}">Delete</a>
 					</td>
