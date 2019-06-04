@@ -116,10 +116,6 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#clearCart").click(function() {
-			window.location = 'clear_cart';
-		});
-		
 		$("#orderForm").validate({
 			rules : {
 				recipientName : "required",
