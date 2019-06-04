@@ -98,12 +98,15 @@ public class TestOrderDAO {
 
 	@Test
 	public void testUpdateBookOrder() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
 	public void testGet() {
-		fail("Not yet implemented");
+		Integer orderId = 7;
+		BookOrder order = orderDAO.get(orderId);
+
+		assertEquals(1, order.getOrderDetails().size());
 	}
 
 	@Test
