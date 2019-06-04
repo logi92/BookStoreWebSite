@@ -26,5 +26,5 @@ public class ClearCartServlet extends HttpServlet {
 		String cartPage = request.getContextPath().concat("/view_cart");
 		response.sendRedirect(cartPage);
 	}
-
 }
+	
