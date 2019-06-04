@@ -28,6 +28,7 @@ import javax.persistence.TemporalType;
 @Table(name = "book_order", catalog = "bookstoredb")
 @NamedQueries({
 	@NamedQuery(name="BookOrder.listAll", query="Select bo From BookOrder bo Order By bo.orderDate Desc"),
+	@NamedQuery(name="BookOrder.countAll", query="Select Count (*) From BookOrder bo"),
 })
 public class BookOrder implements java.io.Serializable {
 

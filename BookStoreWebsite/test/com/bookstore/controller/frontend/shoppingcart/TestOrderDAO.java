@@ -157,7 +157,13 @@ public class TestOrderDAO {
 
 	@Test
 	public void testDeleteObject() {
-		fail("Not yet implemented");
+		Integer orderId = 7;
+
+		orderDAO.delete(orderId);
+
+		long actual = orderDAO.count();
+
+		assertEquals(1, actual);
 	}
 
 	@Test
@@ -181,7 +187,9 @@ public class TestOrderDAO {
 
 	@Test
 	public void testCount() {
-		fail("Not yet implemented");
+		long result = orderDAO.count();
+
+		assertEquals(2, result);
 	}
 
 	@AfterClass
