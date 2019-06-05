@@ -229,4 +229,14 @@ public class OrderServices {
 		listOrders(message);
 	}
 
+	public void deleteOrder() throws ServletException, IOException {
+		Integer orderId = Integer.parseInt(request.getParameter("id"));
+		orderDAO.delete(orderId);
+
+		String message = "Order has been deleted successfully";
+
+		listOrders(message);
+
+	}
+
 }

@@ -65,7 +65,7 @@
 			$(".deleteLink").each(function() {
 				$(this).on("click",function() {
 					orderId = $(this).attr("id");
-						if (confirm('Are you sure you want to delete the Book Order with ID: '+ orderId+ ' ?')) {
+						if (confirm('Are you sure you want to delete the Order with ID: '+ orderId+ ' ?')) {
 								window.location = 'delete_order?id='+ orderId;
 						}
 					});
