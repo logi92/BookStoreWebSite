@@ -154,6 +154,9 @@ public class OrderServices {
 		
 		BookOrder order = orderDAO.get(orderId);
 		
+		HttpSession session = request.getSession();
+		session.setAttribute("order", order);
+		
 		request.setAttribute("order", order);
 		
 		String editPage = "order_form.jsp";

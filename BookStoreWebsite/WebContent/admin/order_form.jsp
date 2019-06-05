@@ -101,7 +101,7 @@
 		</div>
 		<div align="center">
 			<br/>
-				<a href="">Add Books</a>
+				<a href="javascript:showAddBookPopup()">Add Books</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="submit" value="Save"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -112,16 +112,14 @@
 	</form>
 	<jsp:include page="footer.jsp" />
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".deleteLink").each(function() {
-				$(this).on("click",function() {
-					orderId = $(this).attr("id");
-						if (confirm('Are you sure you want to delete the Book Order with ID: '+ orderId+ ' ?')) {
-								window.location = 'delete_order?id='+ orderId;
-						}
-					});
-				});
-			});
+		function showAddBookPopup(){
+			var width = 600;
+			var height = 200;
+			var left = (screen.width - width) / 2;
+			var top = (screen.height - height) / 2;
+			
+			window.open('add_book_form',' _blank', 'width=' + width + ', height=' + height + ', top=' + top +', left=' + left );
+		}
 	</script>
 </body>
 </html>
