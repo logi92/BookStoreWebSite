@@ -192,6 +192,13 @@ public class TestOrderDAO {
 		assertEquals(2, result);
 	}
 
+	@Test
+	public void testListByCustomer() {
+		Integer customerId = 2;
+		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
+		assertTrue(listOrders.size() > 0);
+	}
+
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		orderDAO.close();
