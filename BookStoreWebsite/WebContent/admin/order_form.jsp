@@ -88,7 +88,7 @@
 						<td>${orderDetail.book.price}</td>
 						<td><input type="text" name="quantity" value="${orderDetail.quantity}" size="5"/></td>
 						<td><fmt:formatNumber  currencySymbol="$" value="${orderDetail.subTotal}" type="currency"/></td>
-						<td><a href="">Remove</a></td>
+						<td><a href="remove_book_from_order?id=${orderDetail.book.bookId}">Remove</a></td>
 					</tr>
 				</c:forEach>
 				<tr>
@@ -105,7 +105,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="submit" value="Save"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="button" value="Cancel"/>
+				<input type="button" value="Cancel" onclick="javascript:window.location.href='list_orders';"/>
 		</div>
 		<!--============================================-->
 		<br />
