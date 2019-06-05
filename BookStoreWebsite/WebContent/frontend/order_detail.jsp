@@ -6,9 +6,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Order Details - Bookstore Administration</title>
-<link rel="stylesheet" href="../css/style.css" />
-<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+<title>My Order Details - Bookstore Administration</title>
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -16,22 +15,21 @@
 	<br />
 	<!--============================================-->
 	<div align="center">
-		<h2 class="pageheading">Details of Order ID : ${order.orderId}</h2>
-	</div>
-	<!--============================================-->
-	<div class="message" align="center">
-		<h4>${message}</h4>
+		<h2 class="pageheading">Your Order ID : ${order.orderId}</h2>
 	</div>
 	<!--============================================-->
 	<div align="center">
-		<h2>Order Overview:</h2>
 		<table border="1">
 			<tr>
-				<td><b>Ordered By:</b></td>
-				<td>${order.customer.fullname}</td>
+				<td><b>Order Status:</b></td>
+				<td>${order.orderStatus}</td>
 			</tr>
 			<tr>
-				<td><b>Book Copies:</b></td>
+				<td><b>Order Date:</b></td>
+				<td><fmt:formatDate pattern="MM/dd/yyyy HH:mm" value="${order.orderDate}" /></td>
+			</tr>
+			<tr>
+				<td><b>Quantity:</b></td>
 				<td>${order.bookCopies}</td>
 			</tr>
 			<tr>
@@ -47,20 +45,12 @@
 				<td>${order.recipientPhone}</td>
 			</tr>
 			<tr>
-				<td><b>Payment Method:</b></td>
-				<td>${order.paymentMethod}</td>
-			</tr>
-			<tr>
 				<td><b>Shipping Address:</b></td>
 				<td>${order.shippingAddress}</td>
 			</tr>
 			<tr>
-				<td><b>Order Status:</b></td>
-				<td>${order.orderStatus}</td>
-			</tr>
-			<tr>
-				<td><b>Order Date:</b></td>
-				<td><fmt:formatDate pattern="MM/dd/yyyy HH:mm" value="${order.orderDate}" /></td>
+				<td><b>Payment Method:</b></td>
+				<td>${order.paymentMethod}</td>
 			</tr>
 		</table>
 	</div>
@@ -68,8 +58,8 @@
 		<h2>Ordered Books:</h2>
 		<table border="1">
 			<tr>
-				<th>Index</th>
-				<th>Book Title</th>
+				<th>No</th>
+				<th>Book</th>
 				<th>Author</th>
 				<th>Price</th>
 				<th>Quantity</th>
@@ -77,7 +67,7 @@
 			</tr>
 			<c:forEach items="${order.orderDetails}" var="orderDetail" varStatus="status">
 				<tr>
-					<td>${index.status + 1}</td>
+					<td>${status.index + 1}</td>
 					<td>
 						<img style="vertical-align: middle;" src="data:image/jpg;base64,${orderDetail.book.base64Image}" width="48" height="64" />
 						${orderDetail.book.title}
@@ -95,26 +85,8 @@
 			</tr>
 		</table>
 	</div>
-	<div align="center">
-	<br/>
-	<a href="">Edit this Order</a>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="">Delete this Order</a>
-	</div>
 	<!--============================================-->
 	<br />
 	<jsp:include page="footer.jsp" />
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".deleteLink").each(function() {
-				$(this).on("click",function() {
-					orderId = $(this).attr("id");
-						if (confirm('Are you sure you want to delete the Book Order with ID: '+ orderId+ ' ?')) {
-								window.location = 'delete_order?id='+ orderId;
-						}
-					});
-				});
-			});
-	</script>
 </body>
 </html>

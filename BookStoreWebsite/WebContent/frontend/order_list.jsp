@@ -45,7 +45,7 @@
 					<td><fmt:formatNumber  currencySymbol="$" value="${order.orderTotal}" type="currency"/></td>
 					<td> <fmt:formatDate pattern="MM/dd/yyyy HH:mm" value="${order.orderDate}" /> </td>
 					<td>${order.orderStatus}</td>
-					<td><a href="view_order?id=${order.orderId}">View Details</a></td>
+					<td><a href="show_order_detail?id=${order.orderId}">View Details</a></td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -43,8 +43,7 @@
 			<tr>
 					<td>${status.index}</td>
 					<td>${book.bookId}</td>
-					<td><img src="data:image/jpg;base64,${book.base64Image}"
-						width="84" height="110" /></td>
+					<td><img src="data:image/jpg;base64,${book.base64Image}" width="84" height="110" /></td>
 					<td>${book.title}</td>
 					<td>${book.author}</td>
 					<td>${book.category.name}</td>
