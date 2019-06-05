@@ -9,6 +9,7 @@
 <title>Edit Order Details - Bookstore Administration</title>
 <link rel="stylesheet" href="../css/style.css" />
 <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -86,7 +87,10 @@
 						<td>${orderDetail.book.title}</td>
 						<td>${orderDetail.book.author}</td>
 						<td>${orderDetail.book.price}</td>
-						<td><input type="text" name="quantity" value="${orderDetail.quantity}" size="5"/></td>
+						<td>
+							<input type="hidden" name="bookId" value="${orderDetail.book.bookId}" /> 
+							<input type="text" name="quantity${status.index+1}" value="${orderDetail.quantity}" size="5"/>
+						</td>
 						<td><fmt:formatNumber  currencySymbol="$" value="${orderDetail.subTotal}" type="currency"/></td>
 						<td><a href="remove_book_from_order?id=${orderDetail.book.bookId}">Remove</a></td>
 					</tr>
@@ -120,6 +124,35 @@
 			
 			window.open('add_book_form',' _blank', 'width=' + width + ', height=' + height + ', top=' + top +', left=' + left );
 		}
+		
+		$(document).ready(function() {
+			$("#orderForm").validate({
+				rules : {
+					recipientName : "required",
+					recipientPhone : "required",
+					shippingAddress : "required",
+					
+					<c:forEach items="${order.orderDetails}" var="book" varStatus="status">
+						quantity${status.index + 1}: {
+							required:true, number:true, min :1
+						},
+					</c:forEach>
+				},
+				messages : {
+					recipientName : "Please Enter Recipient Name",
+					recipientPhone : "Please Enter Reccipient Phone",
+					shippingAddress : "Please Enter Shipping Address",
+					
+					<c:forEach items="${order.orderDetails}" var="book" varStatus="status">
+						quantity${status.index + 1}: {
+							required: "Please Enter Quantity",
+							number: "Must be Number",
+							min: "Must be more than 0"
+						},
+					</c:forEach>
+				}
+			});
+		});
 	</script>
 </body>
 </html>

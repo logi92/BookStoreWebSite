@@ -48,14 +48,12 @@
 									src="data:image/jpg;base64,${item.key.base64Image}" /></td>
 								<td>&nbsp;&nbsp; <span id="book-title">${item.key.title}</span>
 								</td>
-								<td><input type="hidden" name="bookId"
-									value="${item.key.bookId}" /> <input type="text"
-									name="quantity${status.index+1}" value="${item.value}" size="5" /></td>
-								<td><fmt:formatNumber value="${item.key.price}"
-										type="currency" currencySymbol="$" /></td>
-								<td><fmt:formatNumber
-										value="${item.value * item.key.price}" type="currency"
-										currencySymbol="$" /></td>
+								<td>
+									<input type="hidden" name="bookId" value="${item.key.bookId}" /> 
+									<input type="text" name="quantity${status.index+1}" value="${item.value}" size="5" />
+								</td>
+								<td><fmt:formatNumber value="${item.key.price}"	type="currency" currencySymbol="$" /></td>
+								<td><fmt:formatNumber value="${item.value * item.key.price}" type="currency" currencySymbol="$" /></td>
 								<td><a href="remove_from_cart?book_id=${item.key.bookId}">Remove</a></td>
 							</tr>
 						</c:forEach>
@@ -66,8 +64,7 @@
 							<td></td>
 							<td><b>${cart.totalQuantity} book(s)</b></td>
 							<td>Total:</td>
-							<td colspan="2"><fmt:formatNumber
-									value="${cart.totalAmount}" type="currency" currencySymbol="$" /></td>
+							<td colspan="2"><fmt:formatNumber value="${cart.totalAmount}" type="currency" currencySymbol="$" /></td>
 						</tr>
 					</table>
 				</div>
