@@ -68,7 +68,7 @@ public class OrderServices {
 		String zipCode = request.getParameter("zipCode");
 		String country = request.getParameter("country");
 		String paymentMethod = request.getParameter("paymentMethod");
-		
+
 		String shippingAddress = address + ", " + city + ", " + zipCode + ", " + country;
 
 		BookOrder order = new BookOrder();
@@ -76,45 +76,44 @@ public class OrderServices {
 		order.setRecipientPhone(recipientPhone);
 		order.setShippingAddress(shippingAddress);
 		order.setPaymentMethod(paymentMethod);
-		
+
 		HttpSession session = request.getSession();
 		Customer customer = (Customer) session.getAttribute("loggedCustomer");
-		
+
 		order.setCustomer(customer);
-		
+
 		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");
-		Map<Book,Integer> items = shoppingCart.getItems();
-		
+		Map<Book, Integer> items = shoppingCart.getItems();
+
 		Iterator<Book> iterator = items.keySet().iterator();
-		
+
 		Set<OrderDetail> orderDetails = new HashSet<>();
-		
-		while(iterator.hasNext()) {
+
+		while (iterator.hasNext()) {
 			Book book = iterator.next();
 			Integer quantity = items.get(book);
 			float subTotal = quantity * book.getPrice();
-			
+
 			OrderDetail orderDetail = new OrderDetail();
 			orderDetail.setBook(book);
 			orderDetail.setBookOrder(order);
 			orderDetail.setQuantity(quantity);
 			orderDetail.setSubTotal(subTotal);
-			
+
 			orderDetails.add(orderDetail);
 		}
 
 		order.setOrderDetails(orderDetails);
 		order.setOrderTotal(shoppingCart.getTotalAmount());
-		
+
 		orderDAO.create(order);
-		
+
 		shoppingCart.clear();
-		
-		String message = "Thank You! Your Order has been received."
-				+ "We will deliver your books withid a few days.";
-		
+
+		String message = "Thank You! Your Order has been received." + "We will deliver your books withid a few days.";
+
 		request.setAttribute("message", message);
-		
+
 		String messagePage = "frontend/message.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(messagePage);
 		dispatcher.forward(request, response);
@@ -123,11 +122,11 @@ public class OrderServices {
 	public void listOrderByCustomer() throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Customer customer = (Customer) session.getAttribute("loggedCustomer");
-		
+
 		List<BookOrder> listOrders = orderDAO.listByCustomer(customer.getCustomerId());
-		
+
 		request.setAttribute("listOrders", listOrders);
-		
+
 		String historyPage = "frontend/order_list.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(historyPage);
 		dispatcher.forward(request, response);
@@ -138,8 +137,7 @@ public class OrderServices {
 
 		HttpSession session = request.getSession();
 		Customer customer = (Customer) session.getAttribute("loggedCustomer");
-		
-		
+
 		BookOrder order = orderDAO.get(orderId, customer.getCustomerId());
 
 		request.setAttribute("order", order);
@@ -151,14 +149,17 @@ public class OrderServices {
 
 	public void showEditOrderForm() throws ServletException, IOException {
 		Integer orderId = Integer.parseInt(request.getParameter("id"));
-		
-		BookOrder order = orderDAO.get(orderId);
-		
+
 		HttpSession session = request.getSession();
-		session.setAttribute("order", order);
-		
-		request.setAttribute("order", order);
-		
+		Object isPendingBook = session.getAttribute("NewBookPendingToAddToorder");
+
+		if (isPendingBook == null) {
+			BookOrder order = orderDAO.get(orderId);
+			session.setAttribute("order", order);
+		} else {
+			session.removeAttribute("NewBookPendingToAddToorder");
+		}
+
 		String editPage = "order_form.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(editPage);
 		dispatcher.forward(request, response);
