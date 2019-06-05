@@ -226,6 +226,29 @@ public class BookDAOTest {
 		System.out.println(result);
 		assertEquals(1, result);
 	}
+	
+	@Test
+	public void testListBestSellingBooks() {
+		List<Book> topBestSellingBooks = bookDAO.listBestSellingBooks();
+		
+		for(Book item : topBestSellingBooks) {
+			System.out.println(item.getTitle());
+		}
+		
+		assertEquals(4, topBestSellingBooks.size());
+	}
+	
+	@Test
+	public void testListMostFavoredBooks() {
+		List<Book> mostFavoredBooks = bookDAO.listMostFavoredBooks();
+		
+		for(Book item : mostFavoredBooks) {
+			System.out.println(item.getBookId());
+		}
+		
+		assertEquals(4, mostFavoredBooks.size());
+	}
+
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
