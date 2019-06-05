@@ -59,11 +59,11 @@
 					<td><b>Order Status:</b></td>
 					<td>
 						<select name="orderStatus">
-							<option value="Processing">Processing</option>
-							<option value="Shipping">Shipping</option>
-							<option value="Delivered">Delivered</option>
-							<option value="Completed">Completed</option>
-							<option value="Cancelled">Cancelled</option>
+							<option value="Processing" <c:if test="${order.orderStatus eq 'Processing'}">selected='selected'</c:if> >Processing</option>
+							<option value="Shipping" <c:if test="${order.orderStatus eq 'Shipping'}">selected='selected'</c:if> >Shipping</option>
+							<option value="Delivered" <c:if test="${order.orderStatus eq 'Delivered'}">selected='selected'</c:if> >Delivered</option>
+							<option value="Completed" <c:if test="${order.orderStatus eq 'Completed'}">selected='selected'</c:if> >Completed</option>
+							<option value="Cancelled" <c:if test="${order.orderStatus eq 'Cancelled'}">selected='selected'</c:if> >Cancelled</option>
 						</select>
 					</td>
 				</tr>
@@ -86,7 +86,10 @@
 						<td>${index.status + 1}</td>
 						<td>${orderDetail.book.title}</td>
 						<td>${orderDetail.book.author}</td>
-						<td>${orderDetail.book.price}</td>
+						<td>
+							<input type="hidden" name="price" value="${orderDetail.book.price}" /> 
+							<fmt:formatNumber  currencySymbol="$" value="${orderDetail.book.price}" type="currency"/>
+						</td>
 						<td>
 							<input type="hidden" name="bookId" value="${orderDetail.book.bookId}" /> 
 							<input type="text" name="quantity${status.index+1}" value="${orderDetail.quantity}" size="5"/>

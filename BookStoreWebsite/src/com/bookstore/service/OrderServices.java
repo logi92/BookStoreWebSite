@@ -33,7 +33,15 @@ public class OrderServices {
 	}
 
 	public void listOrders() throws ServletException, IOException {
+		listOrders(null);
+	}
+
+	public void listOrders(String message) throws ServletException, IOException {
 		List<BookOrder> listAllOrder = orderDAO.listAll();
+
+		if (message != null) {
+			request.setAttribute("message", message);
+		}
 
 		request.setAttribute("listAllOrder", listAllOrder);
 
@@ -163,6 +171,62 @@ public class OrderServices {
 		String editPage = "order_form.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(editPage);
 		dispatcher.forward(request, response);
+	}
+
+	public void updateOrder() throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		BookOrder order = (BookOrder) session.getAttribute("order");
+
+		String recipientName = request.getParameter("recipientName");
+		String recipientPhone = request.getParameter("recipientPhone");
+		String shippingAddress = request.getParameter("shippingAddress");
+		String paymentMethod = request.getParameter("paymentMethod");
+		String orderStatus = request.getParameter("orderStatus");
+
+		order.setRecipientName(recipientName);
+		order.setRecipientPhone(recipientPhone);
+		order.setShippingAddress(shippingAddress);
+		order.setPaymentMethod(paymentMethod);
+		order.setOrderStatus(orderStatus);
+
+		String[] arrayBookId = request.getParameterValues("bookId");
+		String[] arrayPrice = request.getParameterValues("price");
+		String[] arrayQuantity = new String[arrayBookId.length];
+
+		for (int i = 1; i <= arrayQuantity.length; i++) {
+			arrayQuantity[i - 1] = request.getParameter("quantity" + i);
+		}
+
+		Set<OrderDetail> orderDetails = order.getOrderDetails();
+		orderDetails.clear();
+
+		float totalAmount = 0.0f;
+
+		for (int i = 0; i < arrayBookId.length; i++) {
+			int bookId = Integer.parseInt(arrayBookId[i]);
+			int quantity = Integer.parseInt(arrayQuantity[i]);
+			float price = Float.parseFloat(arrayPrice[i]);
+
+			float subTotal = price * quantity;
+
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetail.setBook(new Book(bookId));
+			orderDetail.setQuantity(quantity);
+			orderDetail.setSubTotal(subTotal);
+			orderDetail.setBookOrder(order);
+
+			orderDetails.add(orderDetail);
+
+			totalAmount += subTotal;
+		}
+
+		order.setOrderTotal(totalAmount);
+
+		orderDAO.update(order);
+
+		String message = "The Order " + order.getOrderId() + " has been updated successfuly";
+
+		listOrders(message);
 	}
 
 }
