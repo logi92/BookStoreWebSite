@@ -1,48 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Bookstore Administration</title>
-<link rel="stylesheet" href = "../css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 	<jsp:include page="header.jsp" />
 	<br />
 	<br />
-<!--============================================-->	
+	<!--============================================-->
 	<div align="center">
 		<h2 class="pageheading">Administrative Dashboard</h2>
 	</div>
-<!--============================================-->
+	<!--============================================-->
 	<div align="center">
 		<hr width="50%" />
 		<h2 class="pageheading">Quick Actions:</h2>
-		<b>
-		<a href="1">New Book</a> |
-		<a href="2">New User</a> |
-		<a href="3">New Category</a> |
-		<a href="4">New Customer</a>
-		</b>
+		<b><a href="new_book">New Book</a> | <a href="user_form.jsp">New User</a> | <a href="category_form.jsp">New Category</a> 
+		| <a href="customer_form.jsp">New Customer</a></b>
 	</div>
-<!--============================================-->		
+	<!--============================================-->
 	<div align="center">
-		<hr width="50%"/>
+		<hr width="50%" />
 		<h2 class="pageheading">Recent Sales:</h2>
+		<table border="1">
+			<tr>
+				<th>Order ID</th>
+				<th>Ordered By</th>
+				<th>Book Copies</th>
+				<th>Total</th>
+				<th>Payment Method</th>
+				<th>Status</th>
+				<th>Order Date</th>
+			</tr>
+			<c:forEach items="${listMostRecentSales}" var="order" varStatus="status">
+				<tr>
+					<td><a href="view_order?id=${order.orderId}">${order.orderId}</a></td>
+					<td>${order.customer.fullname}</td>
+					<td>${order.bookCopies}</td>
+					<td>$${order.orderTotal}</td>
+					<td>${order.paymentMethod}</td>
+					<td>${order.orderStatus}</td>
+					<td>${order.orderDate}</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</div>
-<!--============================================-->	
+	<!--============================================-->
 	<div align="center">
-		<hr width="50%"/>
+		<hr width="50%" />
 		<h2 class="pageheading">Recent Reviews:</h2>
+		<table border="1">
+			<tr> 
+				<th>Book</th>
+				<th>Rating</th>
+				<th>Headline</th>
+				<th>Customer</th>
+				<th>Review On</th>
+			</tr>
+			<c:forEach items="${listMostRecent}" var="review" varStatus="status">
+				<tr>
+					<td>${review.book.title}</td>
+					<td>${review.rating}</td>
+					<td><a href="edit_review?id=${review.reviewId}">${review.headline}</a></td>
+					<td>${review.customer.fullname}</td>
+					<td>${review.reviewTime}</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</div>
-<!--============================================-->
+	<!--============================================-->
 	<div align="center">
-		<hr width="50%"/>
+		<hr width="50%" />
 		<h2 class="pageheading">Statistics:</h2>
-		<hr width="50%"/>
+		Total Users: ${totalUsers} &nbsp;&nbsp;&nbsp;&nbsp;
+		Total Books: ${totalBooks} &nbsp;&nbsp;&nbsp;&nbsp;
+		Total Customers: ${totalCustomers} &nbsp;&nbsp;&nbsp;&nbsp;
+		Total Reviews: ${totalReviews} &nbsp;&nbsp;&nbsp;&nbsp;
+		Total Orders: ${totalOrders}
+		<hr width="50%" />
 	</div>
-<!--============================================-->
+	<!--============================================-->
 	<br />
 	<jsp:include page="footer.jsp" />
 </body>

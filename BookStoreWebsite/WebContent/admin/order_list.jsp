@@ -36,7 +36,7 @@
 				<th>Order Date</th>
 				<th>Actions</th>
 			</tr>
-			<c:forEach var="order" items="${listAllOrder}" varStatus="status">>
+			<c:forEach var="order" items="${listAllOrder}" varStatus="status">
 			<tr>
 					<td>${status.index +1}</td>
 					<td>${order.orderId}</td>

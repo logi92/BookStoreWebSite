@@ -198,15 +198,22 @@ public class TestOrderDAO {
 		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
 		assertTrue(listOrders.size() > 0);
 	}
-	
+
 	@Test
 	public void testGetByIdAndCustomer() {
 		Integer orderId = 8;
 		Integer customerId = 24;
-		
+
 		BookOrder order = orderDAO.get(orderId, customerId);
-		
+
 		assertNotNull(order);
+	}
+
+	@Test
+	public void testListMostRecentSales() {
+		List<BookOrder> order = orderDAO.listMostRecentSales();
+
+		assertNotNull(order.size() == 3);
 	}
 
 	@AfterClass

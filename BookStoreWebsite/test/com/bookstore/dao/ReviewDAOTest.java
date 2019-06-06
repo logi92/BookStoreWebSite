@@ -106,22 +106,29 @@ public class ReviewDAOTest {
 	public void testFindByCustomerAndBook() {
 		int customerId = 2;
 		int bookId = 4;
-		
+
 		Review review = reviewDAO.findByCustomerAndBook(customerId, bookId);
-		
+
 		System.out.println(review.getHeadline());
-		
+
 		assertNotNull(review);
 	}
-	
+
 	@Test
 	public void testFindByCustomerAndBookFail() {
 		int customerId = 4;
 		int bookId = 4;
-		
+
 		Review review = reviewDAO.findByCustomerAndBook(customerId, bookId);
-		
+
 		assertNull(review);
+	}
+
+	@Test
+	public void testListMostRecent() {
+		List<Review> result = reviewDAO.listMostRecent();
+
+		assertTrue(result.size() == 3);
 	}
 
 	@AfterClass
